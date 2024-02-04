@@ -82,7 +82,7 @@ void Send_CAN0_message(byte bcChan, uint16_t theaddress, byte *thedata)
 {
 
   byte CANStat = CAN0.sendMsgBuf(theaddress, 0, 8, thedata);
-  Out_TS.Vars.dev1 = CANStat;    
+  //Out_TS.Vars.dev1 = CANStat;    
   if(CANStat == CAN_OK)
   {
     //Serial.println("Message Sent Successfully!");
@@ -117,8 +117,6 @@ void receive_CAN0_message()
     else  
       {
        // id is std 11 bit
-       Out_TS.Vars.dev3 = rxId;
-       Out_TS.Vars.dev2 = configPage1.canRXmsg_MotecPLM;
        if (rxId == configPage1.canRXmsg_MotecPLM)
        {
          canRx_MotecPLM_O2(len, rxBuf);

@@ -138,8 +138,8 @@ uint8_t tsCanId = 0;          // this is the tunerstudio canID for the device yo
                               // this value is set in Tunerstudio when configuring your Speeduino
 uint8_t thistsCanId = 4;      // this is the tunerstudio canId of this device
 
-const unsigned char ECU_signature[]    = "speeduino_TS_OS_V0.30_dev";       //this must match the ini
-const unsigned char ECU_RevNum[]       = "TS_OS_V0.30_dev";      //this is what is displayed in the TS header bar
+const unsigned char ECU_signature[]    = "speeduino_TS_OS_V0.40_dev";       //this must match the ini
+const unsigned char ECU_RevNum[]       = "TS_OS_V0.40_dev";      //this is what is displayed in the TS header bar
 
 const uint8_t  data_structure_version = 2; //This identifies the data structure when reading / writing.
 const uint8_t  page_1_size = 128;
@@ -175,6 +175,7 @@ typedef struct Out_TS_t
   uint16_t digitalPorts48_63_out;
   uint16_t Analog[16];    // 16bit analog value data array for local analog(0-15)
   
+  /* Examples below here, can be removed for your project */
   uint16_t dev1;          //developer use only
   uint16_t dev2;          //developer use only
   uint16_t dev3;          //developer use only
@@ -182,6 +183,14 @@ typedef struct Out_TS_t
   float Vf_i_TestFloatOut;
   uint8_t Ve_i_TestByte1;
   float Ve_Eqr_Sensor1;
+  uint16_t Ve_i_example3DXLookup;  // example variables for tracking table axes points in TS.
+  uint16_t Ve_i_example3DYLookup;  // example variables for tracking table axes points in TS.
+  uint16_t z1;          //developer use only
+  uint16_t z2;          //developer use only
+  uint16_t z3;          //developer use only
+  uint16_t z4;          //developer use only
+  uint16_t Xinterp1;          //developer use only
+  uint16_t Xinterp2;          //developer use only
 };
 
 // this union of structures is to make it easier to transmit multiple data types via serial
@@ -241,13 +250,21 @@ struct __attribute__ ( ( packed ) ) config2
   uint16_t page2ActualSize;  //TS READ ONLY: to check page size in development. This should never exceed the defined page sizes.
   uint32_t page2CRC;         //TS READ ONLY: Future expansion EEPROM CRC for error checking.
   
-  uint8_t exampleTable_Xaxis[8]; //8 byte axis
+  /* Examples below here, can be removed for your project */
+  
+  uint8_t exampleTable_Xaxis[8]; //8 byte axis points
   uint8_t exampleTable_Ydata[8]; //8 byte data
   uint8_t exampleLookupValue; // lookup value for table
 
   int16_t Ke_i_TestValue;      // 2 byte signed variable
   float Kf_i_TestFloat1;       // 4 bytes float in arduino world
   float Kf_i_TestFloat2;       // 4 bytes float in arduino world
+  
+  uint8_t example3DTable_Xaxis[8]; //8 byte axis points
+  uint8_t example3DTable_Yaxis[4]; //4 byte axis points
+  uint8_t example3DTable_Zdata[32]; // 8x4 bytes of data.
+  uint8_t example3DXLookup; // lookup value for X axis of table
+  uint8_t example3DYLookup; // lookup value for X axis of table
 
 //#if defined(CORE_AVR)
 };
